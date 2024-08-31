@@ -1,0 +1,26 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}Home - Email Server{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Welcome to Your Email Server!</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Your Emails</h4>
+                </div>
+                <div class="card-body" style="height: 70vh; overflow-y: auto;">
+                    <!-- Email content will go here -->
+                    <p>No emails to display.</p>
+                </div>
+                <div class="card-footer text-right">
+                    <a href="{{ url_for('create_email') }}" class="btn btn-primary">Send Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

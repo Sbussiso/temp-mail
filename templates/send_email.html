@@ -1,0 +1,64 @@
+<!-- templates/send_email.html -->
+{% extends "base.html" %}
+
+{% block title %}Send Email{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Send a New Email</h2>
+    <form id="emailForm" method="POST" action="{{ url_for('create_email') }}">
+        <div class="form-group">
+            <label for="recipient">Recipient</label>
+            <input type="email" class="form-control" id="recipient" name="recipient" placeholder="Enter recipient's email" required>
+        </div>
+        <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject" required>
+        </div>
+        <div class="form-group">
+            <label for="body">Message</label>
+            <textarea class="form-control" id="body" name="body" rows="5" placeholder="Enter your message" required></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">Send</button>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Confirm Send Email</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to send this email?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="confirmSend" data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('confirmSend').addEventListener('click', function() {
+        console.log('Confirm button clicked.');
+        const form = document.getElementById('emailForm');
+        if (form) {
+            console.log('Form found. Attempting to submit...');
+            form.submit();
+        } else {
+            console.log('Form not found.');
+        }
+    });
+
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+        console.log('Form submitted.');
+    });
+</script>
+{% endblock %}
